@@ -26,7 +26,7 @@ void	print_int_array(int *array, int size);
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
 void	swap(int *stack, int size);
-void	push(int *stack_dest, int *stack_source, int *size_dest, int *size_source);
+void	push(int *dest, int *src, int *dest_size, int *src_size);
 void	rotate(int *stack, int size);
 void	reverse_rotate(int *stack, int size);
 

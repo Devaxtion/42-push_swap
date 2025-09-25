@@ -17,6 +17,7 @@
 void	swap_a(int *stack_a, int size_a)
 {
 	swap(stack_a, size_a);
+	ft_printf("sa\n");
 }
 
 // Swap the first 2 elements at the top of stack b.
@@ -24,6 +25,7 @@ void	swap_a(int *stack_a, int size_a)
 void	swap_b(int *stack_b, int size_b)
 {
 	swap(stack_b, size_b);
+	ft_printf("sb\n");
 }
 
 // sa and sb at the same time.
@@ -31,6 +33,7 @@ void	ss(int *stack_a, int *stack_b, int size_a, int size_b)
 {
 	swap(stack_a, size_a);
 	swap(stack_b, size_b);
+	ft_printf("ss\n");
 }
 
 // Take the first element at the top of b and put it at the top of a.
@@ -38,6 +41,7 @@ void	ss(int *stack_a, int *stack_b, int size_a, int size_b)
 void	push_a(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
 	push(stack_a, stack_b, size_a, size_b);
+	ft_printf("pa\n");
 }
 
 // Take the first element at the top of a and put it at the top of b.
@@ -45,6 +49,7 @@ void	push_a(int *stack_a, int *stack_b, int *size_a, int *size_b)
 void	push_b(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
 	push(stack_b, stack_a, size_b, size_a);
+	ft_printf("pb\n");
 }
 
 // Shift up all elements of stack a by 1.
@@ -52,6 +57,7 @@ void	push_b(int *stack_a, int *stack_b, int *size_a, int *size_b)
 void	rotate_a(int *stack_a, int size_a)
 {
 	rotate(stack_a, size_a);
+	ft_printf("ra\n");
 }
 
 // Shift up all elements of stack b by 1.
@@ -59,13 +65,15 @@ void	rotate_a(int *stack_a, int size_a)
 void	rotate_b(int *stack_b, int size_b)
 {
 	rotate(stack_b, size_b);
+	ft_printf("rb\n");
 }
 
 // ra and rb at the same time.
 void	rr(int *stack_a, int *stack_b, int size_a, int size_b)
 {
-	rotate_a(stack_a, size_a);
-	rotate_b(stack_b, size_b);
+	rotate(stack_a, size_a);
+	rotate(stack_b, size_b);
+	ft_printf("rr\n");
 }
 
 // Shift down all elements of stack a by 1.
@@ -73,6 +81,7 @@ void	rr(int *stack_a, int *stack_b, int size_a, int size_b)
 void	reverse_rotate_a(int *stack_a, int size_a)
 {
 	reverse_rotate(stack_a, size_a);
+	ft_printf("rra\n");
 }
 
 // Shift down all elements of stack b by 1.
@@ -80,11 +89,13 @@ void	reverse_rotate_a(int *stack_a, int size_a)
 void	reverse_rotate_b(int *stack_b, int size_b)
 {
 	reverse_rotate(stack_b, size_b);
+	ft_printf("rrb\n");
 }
 
 // rra and rrb at the same time.
 void	rrr(int *stack_a, int *stack_b, int size_a, int size_b)
 {
-	reverse_rotate_a(stack_a, size_a);
-	reverse_rotate_b(stack_b, size_b);
+	reverse_rotate(stack_a, size_a);
+	reverse_rotate(stack_b, size_b);
+	ft_printf("rrr\n");
 }

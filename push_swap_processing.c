@@ -12,13 +12,14 @@
 
 #include "push_swap.h"
 
+// 0: no error / no arguments
 // 1: other errors
-// 2: no arguments
-// 3: argument has to only have integers
-// 4: argument has duplicates
+// 2: argument has to only have integers
+// 3: argument has duplicates
 void	error_exit(int status_code, int *stack_a, int *stack_b)
 {
-	ft_printf("Error %i\n", status_code);
+	if (status_code != 0)
+		ft_printf("Error %i\n", status_code);
 	if (stack_a)
 		free(stack_a);
 	if (stack_b)
@@ -66,7 +67,7 @@ int	process_args(int argc, char **argv, int *stack)
 	{
 		// check if string only has integers
 		if (!is_str_int(argv[i + 1])) // 20
-			return (3);
+			return (2);
 		
 		// TODO check if string is inside limits
 
@@ -75,7 +76,7 @@ int	process_args(int argc, char **argv, int *stack)
 
 		// Error: it's a duplicate
 		if (is_int_in_array(stack, int_to_add))
-			return (4);
+			return (3);
 		
 		// Add to the stack
 		stack[i] = int_to_add;

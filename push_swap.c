@@ -19,10 +19,11 @@ int	main(int argc, char **argv)
 	int	size_a;
 	int	size_b;
 	int	status_code;
+	int	used_operations;
 
 	// Error: no arguments
 	if (argc <= 1)
-		error_exit(2, NULL, NULL);
+		error_exit(0, NULL, NULL);
 
 	// Criamos e malocamos um array de ints com a quantidade argc - 1
 	size_a = (argc - 1);
@@ -37,6 +38,11 @@ int	main(int argc, char **argv)
 	
 	size_b = 0;
 	stack_b = malloc(size_a * sizeof(int));
+
+	// start operations
+	used_operations = 0;
+
+	ft_printf("%i", used_operations);
 
 	print_stacks(stack_a, stack_b, size_a, size_b);
 	swap_a(stack_a, size_a);
