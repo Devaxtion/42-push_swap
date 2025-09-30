@@ -24,7 +24,7 @@ SRCS_DIR = .
 LIBFT_DIR = libft
 
 # Files
-FILES = push_swap push_swap_utils push_swap_operations push_swap_processing push_swap_sorting
+FILES = main utils op_swap op_push op_rotate op_reverse_rotate sorting
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 OUT_FILE = push_swap.exe
 

@@ -18,35 +18,36 @@
 # include "./libft/libft.h"
 # include "./libft/ft_printf.h"
 
+// Utils
+
 void	error_exit(int status_code, int *stack_a, int *stack_b);
 int		is_str_int(char *str);
 int		is_int_in_array(int *array, int size, int n);
 int		get_smallest_idx(int *array, int size);
-int		process_args(int argc, char **argv, int *stack, int size);
 void	print_int_array(int *array, int size);
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
-void	swap(int *stack, int size);
-void	push(int *dest, int *src, int *dest_size, int *src_size);
-void	rotate(int *stack, int size);
-void	reverse_rotate(int *stack, int size);
+// Operations
 
-void	swap_a(int *stack_a, int size_a);
-void	swap_b(int *stack_b, int size_b);
-void	ss(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_sa(int *stack_a, int size_a);
+void	do_sb(int *stack_b, int size_b);
+void	do_ss(int *stack_a, int *stack_b, int size_a, int size_b);
 
-void	push_a(int *stack_a, int *stack_b, int *size_a, int *size_b);
-void	push_b(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	do_pa(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	do_pb(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
-void	rotate_a(int *stack_a, int size_a);
-void	rotate_b(int *stack_b, int size_b);
-void	rr(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_ra(int *stack_a, int size_a);
+void	do_rb(int *stack_b, int size_b);
+void	do_rr(int *stack_a, int *stack_b, int size_a, int size_b);
 
-void	reverse_rotate_a(int *stack_a, int size_a);
-void	reverse_rotate_b(int *stack_b, int size_b);
-void	rrr(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_rra(int *stack_a, int size_a);
+void	do_rrb(int *stack_b, int size_b);
+void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b);
+
+// Sorting
 
 void	test_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
 void	small_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_processing.c                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 14:15:53 by leramos-          #+#    #+#             */
-/*   Updated: 2025/09/24 14:15:53 by leramos-         ###   ########.fr       */
+/*   Created: 2025/09/30 18:32:33 by leramos-          #+#    #+#             */
+/*   Updated: 2025/09/30 18:32:33 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,36 +71,6 @@ int		get_smallest_idx(int *array, int size)
 		i++;
 	}
 	return (smallest_idx);
-}
-
-int	process_args(int argc, char **argv, int *stack, int size)
-{
-	int	i;
-	int	int_to_add;
-
-	i = 0;
-	while (i < argc - 1) // args = nameprogram 20 30 40 50 60 // argc = 6
-	{
-		// check if string only has integers
-		if (!is_str_int(argv[i + 1])) // 20
-			return (2);
-		
-		// TODO check if string is inside limits
-
-		// convert from str to int
-		int_to_add = ft_atoi(argv[i + 1]);
-
-		// Error: it's a duplicate
-		if (is_int_in_array(stack, size, int_to_add))
-			return (3);
-		
-		// Add to the stack
-		stack[i] = int_to_add;
-
-		i++;
-	}
-
-	return (0);
 }
 
 void	print_int_array(int *array, int size)
