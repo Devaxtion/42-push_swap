@@ -43,12 +43,12 @@ int	is_str_int(char *str)
 	return (1);
 }
 
-int	is_int_in_array(int *array, int n)
+int	is_int_in_array(int *array, int size, int n)
 {
 	int	i;
 
 	i = 0;
-	while (array[i] != '\0')
+	while (i < size)
 	{
 		if (array[i] == n)
 			return (1);
@@ -57,7 +57,23 @@ int	is_int_in_array(int *array, int n)
 	return (0);
 }
 
-int	process_args(int argc, char **argv, int *stack)
+int		get_smallest_idx(int *array, int size)
+{
+	int	smallest_idx;
+	int	i;
+
+	smallest_idx = 0;
+	i = 1;
+	while (i < size)
+	{
+		if (array[i] < array[smallest_idx])
+			smallest_idx = i;
+		i++;
+	}
+	return (smallest_idx);
+}
+
+int	process_args(int argc, char **argv, int *stack, int size)
 {
 	int	i;
 	int	int_to_add;
@@ -75,7 +91,7 @@ int	process_args(int argc, char **argv, int *stack)
 		int_to_add = ft_atoi(argv[i + 1]);
 
 		// Error: it's a duplicate
-		if (is_int_in_array(stack, int_to_add))
+		if (is_int_in_array(stack, size, int_to_add))
 			return (3);
 		
 		// Add to the stack

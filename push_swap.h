@@ -19,9 +19,10 @@
 # include "./libft/ft_printf.h"
 
 void	error_exit(int status_code, int *stack_a, int *stack_b);
-int	is_str_int(char *str);
-int	is_int_in_array(int *array, int n);
-int	process_args(int argc, char **argv, int *stack);
+int		is_str_int(char *str);
+int		is_int_in_array(int *array, int size, int n);
+int		get_smallest_idx(int *array, int size);
+int		process_args(int argc, char **argv, int *stack, int size);
 void	print_int_array(int *array, int size);
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
 
@@ -44,5 +45,8 @@ void	rr(int *stack_a, int *stack_b, int size_a, int size_b);
 void	reverse_rotate_a(int *stack_a, int size_a);
 void	reverse_rotate_b(int *stack_b, int size_b);
 void	rrr(int *stack_a, int *stack_b, int size_a, int size_b);
+
+void	test_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	small_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
 #endif
