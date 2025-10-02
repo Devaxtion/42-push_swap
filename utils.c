@@ -73,7 +73,7 @@ int		get_smallest_idx(int *array, int size)
 	return (smallest_idx);
 }
 
-void	print_int_array(int *array, int size)
+static void	print_int_array(int *array, int size)
 {
     int	i;
 
@@ -87,11 +87,15 @@ void	print_int_array(int *array, int size)
     ft_printf("]\n");
 }
 
+void	print_stack(int *stack, int size, char l)
+{
+	ft_printf("Stack %c (%i): ", l, size);
+	print_int_array(stack, size);
+}
+
 void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
 {
-	ft_printf("Stack A (%i): ", size_a);
-	print_int_array(stack_a, size_a);
-	ft_printf("Stack B (%i): ", size_b);
-	print_int_array(stack_b, size_b);
+	print_stack(stack_a, size_a, 'A');
+	print_stack(stack_b, size_b, 'B');
 	ft_printf("\n");
 }

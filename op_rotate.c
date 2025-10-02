@@ -34,7 +34,7 @@ static void	rotate(int *stack, int size)
 void	do_ra(int *stack_a, int size_a)
 {
 	rotate(stack_a, size_a);
-	ft_printf("ra\n");
+	//ft_printf("ra\n");
 }
 
 // Shift up all elements of stack b by 1.

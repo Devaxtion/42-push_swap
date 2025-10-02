@@ -12,26 +12,6 @@
 
 #include "push_swap.h"
 
-void	test_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
-{
-	print_stacks(stack_a, stack_b, *size_a, *size_b);
-	do_sa(stack_a, *size_a);
-	print_stacks(stack_a, stack_b, *size_a, *size_b);
-	do_ra(stack_a, *size_a);
-	print_stacks(stack_a, stack_b, *size_a, *size_b);
-	do_rra(stack_a, *size_a);
-	print_stacks(stack_a, stack_b, *size_a, *size_b);
-	ft_printf("\n");
-	// do_pb(stack_a, stack_b, size_a, size_b);
-	// print_stacks(stack_a, stack_b, *size_a, *size_b);
-	// do_pb(stack_a, stack_b, size_a, size_b);
-	// print_stacks(stack_a, stack_b, *size_a, *size_b);
-	// do_pb(stack_a, stack_b, size_a, size_b);
-	// print_stacks(stack_a, stack_b, *size_a, *size_b);
-	// do_pb(stack_a, stack_b, size_a, size_b);
-	// print_stacks(stack_a, stack_b, *size_a, *size_b);
-}
-
 void	small_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
 	int	smallest_idx;
@@ -71,186 +51,130 @@ void	small_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
 		do_pa(stack_a, stack_b, size_a, size_b);
 }
 
-int	get_chunk_size(int size_a)
-{
-	return (sqrt(size_a));
-}
-
-void	replace_stack_with_indexes(int *stack_a, int size_a, int *stack_c)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size_a)
-	{
-		j = 0;
-		while (stack_c[j] != stack_a[i])
-			j++;
-		stack_a[i] = j;
-		i++;
-	}
-}
-
-void	replace_stack_with_numbers(int *stack_a, int size_a, int *stack_c)
-{
-	int	i;
-
-	i = 0;
-	while (i < size_a)
-	{
-		stack_a[i] = stack_c[i];
-		i++;
-	}
-}
-
-void	clone_stack(int *dest, int *src, int src_size)
-{
-	int	i;
-
-	i = 0;
-	while (i < src_size)
-	{
-		dest[i] = src[i];
-		i++;
-	}
-}
-
-int	is_stack_b_sorted(int *stack_b, int *size_b)
-{
-	int	i;
-
-	i = 1;
-	while (i < *size_b)
-	{
-		if (stack_b[i - 1] < stack_b[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b)
-{
-	// if there is nothing on B, just push B
-	if (*size_b == 0)
-		return (do_pb(stack_a, stack_b, size_a, size_b));
-
-	// if there is numbers on B:
-	// if A[0] > B[0], push B
-	if (stack_a[0] > stack_b[0])
-		return (do_pb(stack_a, stack_b, size_a, size_b));
-
-	// else,			 (if A[0] > B[0]),
-	else
-	{
-		//	- if A[0] < B[last]
-		//		- push B
-		//		- rotate B
-		if (stack_a[0] < stack_b[*size_b - 1])
-		{
-			do_pb(stack_a, stack_b, size_a, size_b);
-			do_rb(stack_b, *size_b);
-		}
-		//	- else,         (if A[0] > B[last]),
-		//		- rotate B até A[0] estiver entre B[0] e B[last] //// rotate B até A[0] > B[0]
-		//		- push B
-		//		- reverse rotate B a quantidade de vezes que fizemos antes //// reverse rotate B até A[0] > B[last]
-		else
-		{
-			while (stack_a[0] < stack_b[0])
-				do_rb(stack_b, *size_b);
-			do_pb(stack_a, stack_b, size_a, size_b);
-			while (stack_a[0] > stack_b[*size_b - 1])
-				do_rrb(stack_b, *size_b);
-
-		}
-	}
-
-}
-
-void	bring_number_to_top(int n_idx, int *stack_a, int *size_a)
-{
-	int	n;
-	int	number_is_in_first_half;
-
-	// while (stack_a[0] != stack_a[n_idx])
-	// while (n_idx != 0)
-	n = stack_a[n_idx];
-	number_is_in_first_half = n_idx <= *size_a / 2;
-	while (stack_a[0] != n)
-	{
-		// if index is in the first half, we'll bring it with rr
-		if (number_is_in_first_half)
-			do_ra(stack_a, *size_a);
-		// else, we'll bring it with rra
-		else
-			do_rra(stack_a, *size_a);
-	}
-}
-
-int	find_closest_number(int *stack_a, int size_a, int chunk_size, int chunk_idx)
-{
-	int	i;
-	int	j;
-	int	chunk_end;
-
-	chunk_end = chunk_size * (chunk_idx + 1) - 1;
-	i = 0;
-	while (i != size_a / 2)
-	{
-		j = size_a - 1 - i;
-		if (stack_a[i] <= chunk_end)
-			return (i);
-		if (stack_a[j] <= chunk_end)
-			return (j);
-		i++;
-	}
-	return (-1);
-}
-
 void	big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
 {
 	int	chunk_size;
 	int	chunk_idx;
 	int	closest_number_idx;
 	int	*stack_c;
-	// create and allocate a new stack C with the same size
+	int	chunk_biggest_number;
+	int	chunk_median;
+
+	// clone stack A to stack C and sort it
 	stack_c = ft_calloc(*size_a, sizeof(int));
-	// clone the stack A to it
 	clone_stack(stack_c, stack_a, *size_a);
-	// sort the new stack C
-	;
+	quicksort(stack_c, 0, *size_a - 1);
+
 	// replace stack A values with indexes of the values in stack C
 	replace_stack_with_indexes(stack_a, *size_a, stack_c);
 
-	// get the chunk size = sqrt(n);
 	chunk_size = get_chunk_size(*size_a);
 	
 	// move chunk by chunk to stack B
 	chunk_idx = 0;
-	while (chunk_size * chunk_idx < *size_a + chunk_size)
+	while (*size_a != 0)
 	{
+		chunk_biggest_number = (chunk_size * (chunk_idx + 1) - 1);
+		chunk_median = chunk_biggest_number - chunk_size / 2;
+
 		// Move chunk to Stack B
-		while (*size_a != 0)
+		// “Does stack A still contain at least one element in the current chunk range?”
+		while (1)
 		{
 			// find the closest number to the top or bottom (from current chunk)
-			closest_number_idx = find_closest_number(stack_a, *size_a, chunk_size, chunk_idx);
+			closest_number_idx = find_closest_chunk_element(stack_a, *size_a, chunk_biggest_number);
+			if (closest_number_idx == -1)
+				break;
 
 			// Put it on top
-			bring_number_to_top(closest_number_idx, stack_a, size_a);
+			bring_number_to_top(closest_number_idx, stack_a, *size_a, do_ra, do_rra, do_sa);
 
 			// Place the number on B
-			place_on_b(stack_a, stack_b, size_a, size_b);
+			place_on_b(stack_a, stack_b, size_a, size_b, chunk_median);
 		}
 		// Next chunk
 		chunk_idx++;
 	}
+
 	// push everything to A
-	while (*size_b != 0)
-		do_pa(stack_a, stack_b, size_a, size_b);
+	place_on_a(stack_a, stack_b, size_a, size_b);
+
 	// replace A numbers with C
 	replace_stack_with_numbers(stack_a, *size_a, stack_c);
-	// free C
 	free(stack_c);
 }
+
+
+
+
+
+
+// void	old_big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
+// {
+// 	int	chunk_size;
+// 	int	chunk_idx;
+// 	int	closest_number_idx;
+// 	int	*stack_c;
+
+// 	// create and allocate a new stack C with the same size
+// 	// ft_printf("- Creating Stack C... ");
+// 	stack_c = ft_calloc(*size_a, sizeof(int));
+// 	// ft_printf("Done!\n");
+
+// 	// clone the stack A to it
+// 	// ft_printf("- Cloning the Stack A to C... ");
+// 	clone_stack(stack_c, stack_a, *size_a);
+// 	// ft_printf("Done!\n");
+
+// 	// sort the new stack C
+// 	// ft_printf("- Sorting the Stack C... ");
+// 	quicksort(stack_c, 0, *size_a - 1);
+// 	// ft_printf("Done!\n");
+
+// 	// replace stack A values with indexes of the values in stack C
+// 	// ft_printf("- Replacing stack A values with indexes of the values in stack C... ");
+// 	replace_stack_with_indexes(stack_a, *size_a, stack_c);
+// 	// ft_printf("Done!\n");
+
+// 	// print_stack(stack_a, *size_a, 'A');
+// 	// ft_printf("\n");
+
+// 	// get the chunk size
+// 	chunk_size = get_chunk_size(*size_a);
+// 	// ft_printf("- Chunk Size = %i\n", chunk_size);
+	
+// 	// move chunk by chunk to stack B
+// 	chunk_idx = 0;
+// 	while (*size_a != 0)
+// 	{
+// 		// Move chunk to Stack B
+// 		// “Does stack A still contain at least one element in the current chunk range?”
+// 		while (find_closest_chunk_element(stack_a, *size_a, chunk_size, chunk_idx) != -1)
+// 		{
+// 			// ft_printf("- Start while: Chunk Index = %i\n", chunk_idx);
+// 			// print_stacks(stack_a, stack_b, *size_a, *size_b);
+// 			// find the closest number to the top or bottom (from current chunk)
+// 			closest_number_idx = find_closest_chunk_element(stack_a, *size_a, chunk_size, chunk_idx);
+// 			// ft_printf("- Closest number (idx) = %i\n", closest_number_idx);
+
+// 			// Put it on top
+// 			bring_number_to_top(closest_number_idx, stack_a, size_a);
+// 			// ft_printf("- Brought number %i to top\n", stack_a[0]);
+// 			// print_stacks(stack_a, stack_b, *size_a, *size_b);
+
+// 			// Place the number on B
+// 			place_on_b(stack_a, stack_b, size_a, size_b);
+// 			// ft_printf("- Placed on B\n");
+// 			// print_stacks(stack_a, stack_b, *size_a, *size_b);
+// 		}
+// 		// Next chunk
+// 		chunk_idx++;
+// 	}
+// 	// push everything to A
+// 	while (*size_b != 0)
+// 		do_pa(stack_a, stack_b, size_a, size_b);
+// 	// replace A numbers with C
+// 	replace_stack_with_numbers(stack_a, *size_a, stack_c);
+// 	// free C
+// 	free(stack_c);
+// }

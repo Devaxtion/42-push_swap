@@ -72,10 +72,16 @@ int	main(int argc, char **argv)
 
 	// start operations
 	// test_sorting(stack_a, stack_b, &size_a, &size_b);
-	print_stacks(stack_a, stack_b, size_a, size_b);
-	if (size_a <= 5 || size_a >= 5)
+	// ft_printf("Initial Stacks:\n");
+	// print_stacks(stack_a, stack_b, size_a, size_b);
+
+	if (size_a > 5)
+		big_sorting(stack_a, stack_b, &size_a, &size_b);
+	else
 		small_sorting(stack_a, stack_b, &size_a, &size_b);
-	print_stacks(stack_a, stack_b, size_a, size_b);
+
+	// ft_printf("Final Stacks\n");
+	// print_stacks(stack_a, stack_b, size_a, size_b);
 
 	error_exit(0, stack_a, stack_b);
 	return (0);
