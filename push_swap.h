@@ -15,17 +15,23 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "./libft/libft.h"
 # include "./libft/ft_printf.h"
 
+// Errors
+
+#define ERR_ALLOC 1
+#define ERR_INVALID_INT 2
+#define ERR_DUPLICATE 3
+
+// Input
+
+void	init_stacks(int argc, char **argv, int **stack_a, int **stack_b, int *size_a, int *size_b);
+
 // Utils
 
-void	error_exit(int status_code, int *stack_a, int *stack_b);
-int		is_str_int(char *str);
-int		is_int_in_array(int *array, int size, int n);
-int		get_smallest_idx(int *array, int size);
-void	print_stack(int *stack, int size, char l);
-void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b);
+void	cleanup_and_exit(int status_code, int *stack_a, int *stack_b);
 
 // Operations
 
@@ -46,15 +52,18 @@ void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b);
 
 // Sorting
 
-void	small_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
-void	big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
 // Sorting Utils
 
+int		is_stack_sorted(int *stack, int size);
+int		get_smallest_idx(int *array, int size);
+int		*create_sorted_stack(int *stack, int size);
 void	clone_stack(int *dest, int *src, int src_size);
 void	replace_stack_with_indexes(int *stack_a, int size_a, int *stack_c);
 void	replace_stack_with_numbers(int *stack_a, int size_a, int *stack_c);
 int		get_chunk_size(int size_a);
+void	move_chunk_to_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_size, int chunk_idx);
 int		find_closest_chunk_element(int *stack, int size, int chunk_biggest_number);
 void	bring_number_to_top(
 	int		i,

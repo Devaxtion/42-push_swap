@@ -10,38 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
 #include "push_swap.h"
 
-static int	process_args(int argc, char **argv, int *stack, int size)
+static void	print_int_array(int *array, int size)
 {
-	int	i;
-	int	int_to_add;
+    int	i;
 
-	i = 0;
-	while (i < argc - 1) // args = nameprogram 20 30 40 50 60 // argc = 6
-	{
-		// check if string only has integers
-		if (!is_str_int(argv[i + 1])) // 20
-			return (2);
-		
-		// TODO check if string is inside limits
+    ft_printf("[");
+    for (i = 0; i < size; i++)
+    {
+        ft_printf("%d", array[i]);
+        if (i < size - 1)
+            ft_printf(", ");
+    }
+    ft_printf("]\n");
+}
 
-		// convert from str to int
-		int_to_add = ft_atoi(argv[i + 1]);
+static void	print_stack(int *stack, int size, char l)
+{
+	ft_printf("Stack %c (%i): ", l, size);
+	print_int_array(stack, size);
+}
 
-		// Error: it's a duplicate
-		if (is_int_in_array(stack, size, int_to_add))
-			return (3);
-		
-		// Add to the stack
-		stack[i] = int_to_add;
-
-		i++;
-	}
-
-	return (0);
+static void	print_stacks(int *stack_a, int *stack_b, int size_a, int size_b)
+{
+	print_stack(stack_a, size_a, 'A');
+	print_stack(stack_b, size_b, 'B');
+	ft_printf("\n");
 }
 
 int	main(int argc, char **argv)
@@ -50,39 +45,11 @@ int	main(int argc, char **argv)
 	int *stack_b;
 	int	size_a;
 	int	size_b;
-	int	status_code;
-
-	// Error: no arguments
-	if (argc <= 1)
-		error_exit(0, NULL, NULL);
-
-	// Criamos e malocamos um array de ints com a quantidade argc - 1
-	size_a = (argc - 1);
-	stack_a = ft_calloc(size_a, sizeof(int));
-	if (!stack_a)
-		error_exit(1, stack_a, NULL);
-
-	// Checkar um a um cada argv e colocar no array, se um deles não é valido, cancela, dá free e dá erro exit
-	status_code = process_args(argc, argv, stack_a, size_a);
-	if (status_code != 0)
-		error_exit(status_code, stack_a, NULL);
 	
-	size_b = 0;
-	stack_b = ft_calloc(size_a, sizeof(int));
-
-	// start operations
-	// test_sorting(stack_a, stack_b, &size_a, &size_b);
-	// ft_printf("Initial Stacks:\n");
-	// print_stacks(stack_a, stack_b, size_a, size_b);
-
-	if (size_a > 5)
-		big_sorting(stack_a, stack_b, &size_a, &size_b);
-	else
-		small_sorting(stack_a, stack_b, &size_a, &size_b);
-
-	// ft_printf("Final Stacks\n");
-	// print_stacks(stack_a, stack_b, size_a, size_b);
-
-	error_exit(0, stack_a, stack_b);
+	init_stacks(argc, argv, &stack_a, &stack_b, &size_a, &size_b);
+	if (!is_stack_sorted(stack_a, size_a))
+		sort(stack_a, stack_b, &size_a, &size_b);
+	print_stacks(stack_a, stack_b, size_a, size_b);
+	cleanup_and_exit(0, stack_a, stack_b);
 	return (0);
 }
