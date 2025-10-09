@@ -32,6 +32,10 @@ void	init_stacks(int argc, char **argv, int **stack_a, int **stack_b, int *size_
 // Utils
 
 void	cleanup_and_exit(int status_code, int *stack_a, int *stack_b);
+int		is_array_sorted(int *array, int size);
+int		get_smallest_idx(int *array, int size);
+void	copy_int_array(int *dest, int *src, int src_size);
+int		find_n_in_array(int *array, int size, int n);
 
 // Operations
 
@@ -56,15 +60,6 @@ void	sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
 
 // Sorting Utils
 
-int		is_stack_sorted(int *stack, int size);
-int		get_smallest_idx(int *array, int size);
-int		*create_sorted_stack(int *stack, int size);
-void	clone_stack(int *dest, int *src, int src_size);
-void	replace_stack_with_indexes(int *stack_a, int size_a, int *stack_c);
-void	replace_stack_with_numbers(int *stack_a, int size_a, int *stack_c);
-int		get_chunk_size(int size_a);
-void	move_chunk_to_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_size, int chunk_idx);
-int		find_closest_chunk_element(int *stack, int size, int chunk_biggest_number);
 void	bring_number_to_top(
 	int		i,
 	int		*stack,
@@ -73,11 +68,22 @@ void	bring_number_to_top(
 	void	(*reverse_rotate)(int *, int),
 	void	(*swap)(int *, int)
 );
-void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_median);
 void	place_on_a(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_median);
+
+// Sorted Stack
+
+int		*create_sorted_stack(int *stack, int size);
+void	replace_stack_with_indexes(int *stack_a, int size_a, int *stack_c);
+void	replace_stack_with_elements(int *stack_a, int size_a, int *stack_c);
+
+// Chunk Utils
+
+int		get_chunk_size(int size_a);
+void	move_chunk_to_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_size, int chunk_idx);
 
 // Quick Sort
 
-void quicksort(int *arr, int low, int high);
+void	quicksort(int *array, int low, int high);
 
 #endif

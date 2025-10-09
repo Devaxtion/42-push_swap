@@ -47,7 +47,7 @@ int	main(int argc, char **argv)
 	int	size_b;
 	
 	init_stacks(argc, argv, &stack_a, &stack_b, &size_a, &size_b);
-	if (!is_stack_sorted(stack_a, size_a))
+	if (!is_array_sorted(stack_a, size_a))
 		sort(stack_a, stack_b, &size_a, &size_b);
 	print_stacks(stack_a, stack_b, size_a, size_b);
 	cleanup_and_exit(0, stack_a, stack_b);

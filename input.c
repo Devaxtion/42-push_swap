@@ -58,7 +58,7 @@ static int	parse_args_to_stack(char **argv, int *stack, int size)
 		if (!is_int_valid(argv[i + 1]))
 			return (ERR_INVALID_INT);
 		int_to_add = ft_atoi(argv[i + 1]);
-		if (array_contains_int(stack, size, int_to_add))
+		if (array_contains_int(stack, i, int_to_add))
 			return (ERR_DUPLICATE);
 		stack[i] = int_to_add;
 		i++;

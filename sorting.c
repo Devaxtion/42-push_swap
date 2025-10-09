@@ -94,8 +94,8 @@ static void	big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
 		chunk_idx++;
 	}
 	place_on_a(stack_a, stack_b, size_a, size_b);
-	// replace A numbers with C
-	replace_stack_with_numbers(stack_a, *size_a, stack_c);
+	// replace A indexes with the elements with C
+	replace_stack_with_elements(stack_a, *size_a, stack_c);
 	free(stack_c);
 }
 

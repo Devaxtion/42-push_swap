@@ -10,37 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static void swap(int *a, int *b)
+#include "push_swap.h"
+
+static void	swap(int *a, int *b)
 {
-    int tmp = *a;
-    *a = *b;
-    *b = tmp;
+	int	tmp;
+	
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-static int partition(int *arr, int low, int high)
+static int	partition(int *array, int low, int high)
 {
-    int pivot = arr[high];   // choose last element as pivot
-    int i = low - 1;
+	int pivot;
+	int i;
+	int	j;
 
-    for (int j = low; j < high; j++)
-    {
-        if (arr[j] <= pivot)
-        {
-            i++;
-            swap(&arr[i], &arr[j]);
-        }
-    }
-    swap(&arr[i + 1], &arr[high]);
-    return (i + 1);
+	pivot = array[high];
+	i = low - 1;
+	j = low;
+	while (j < high)
+	{
+		if (array[j] < pivot)
+		{
+			i++;
+			swap(&array[i], &array[j]);
+		}
+		j++;
+	}
+	swap(&array[i + 1], &array[high]);
+	return (i + 1);
 }
 
-void quicksort(int *arr, int low, int high)
+void quicksort(int *array, int low, int high)
 {
-    if (low < high)
-    {
-        int pi = partition(arr, low, high);
+	int pivot_idx;
 
-        quicksort(arr, low, pi - 1);
-        quicksort(arr, pi + 1, high);
-    }
+	if (low < high)
+	{
+		pivot_idx = partition(array, low, high);
+		quicksort(array, low, pivot_idx - 1);
+		quicksort(array, pivot_idx + 1, high);
+	}
 }
