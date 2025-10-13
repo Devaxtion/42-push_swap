@@ -6,7 +6,7 @@
 #    By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 11:54:19 by leramos-          #+#    #+#              #
-#    Updated: 2025/06/24 12:57:02 by leramos-         ###   ########.fr        #
+#    Updated: 2025/10/13 12:34:04 by leramos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ LIBFT_DIR = libft
 # Files
 FILES = main input utils op_swap op_push op_rotate op_reverse_rotate sorting sorting_utils chunk_utils sorted_stack quicksort
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
-OUT_FILE = push_swap.exe
+OUT_FILE = push_swap
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(FILES)))
 OBJS = $(SRCS:.c=.o)

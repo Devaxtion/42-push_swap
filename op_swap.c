@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:14:43 by leramos-          #+#    #+#             */
-/*   Updated: 2025/09/30 18:14:43 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 12:15:28 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // Do nothing if there is only one element or none.
 static void	swap(int *stack, int size)
 {
-    int	temp;
+	int	temp;
 
 	if (size > 1)
 	{

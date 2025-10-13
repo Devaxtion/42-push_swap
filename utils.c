@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:33 by leramos-          #+#    #+#             */
-/*   Updated: 2025/09/30 18:32:33 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 12:36:56 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	cleanup_and_exit(int status_code, int *stack_a, int *stack_b)
 {
 	if (status_code != 0)
-		ft_printf("Error %i\n", status_code);
+		ft_printf("Error\n");
 	if (stack_a)
 		free(stack_a);
 	if (stack_b)

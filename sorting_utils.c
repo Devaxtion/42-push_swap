@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:43:58 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/02 12:43:58 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 13:58:33 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,9 @@ void	place_on_a(int *stack_a, int *stack_b, int *size_a, int *size_b)
 	int	n_to_push;
 	int	n_to_push_idx;
 
-	n_to_push = *size_b - 1;
-
 	while (*size_b != 0)
 	{
-		// find n_to_push
+		n_to_push = *size_b - 1;
 		n_to_push_idx = find_n_in_array(stack_b, *size_b, n_to_push);
 
 		// we get n_to_push to the top
@@ -78,7 +76,7 @@ void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_
 		return (do_pb(stack_a, stack_b, size_a, size_b));
 	
 	// if A[0] > median, push B
-	if (stack_a[0] > chunk_median)
+	if (stack_a[0] >= chunk_median)
 		do_pb(stack_a, stack_b, size_a, size_b);
 
 	// else (A[0] < median), push B and rotate B

@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:13:49 by leramos-          #+#    #+#             */
-/*   Updated: 2025/09/30 18:13:49 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 12:15:47 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	rotate(int *stack, int size)
 void	do_ra(int *stack_a, int size_a)
 {
 	rotate(stack_a, size_a);
-	//ft_printf("ra\n");
+	ft_printf("ra\n");
 }
 
 // Shift up all elements of stack b by 1.

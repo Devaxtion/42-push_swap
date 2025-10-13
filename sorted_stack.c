@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 12:29:23 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/09 12:29:23 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 13:36:26 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	replace_stack_with_elements(int *stack_a, int size_a, int *stack_c)
 	i = 0;
 	while (i < size_a)
 	{
-		stack_a[i] = stack_c[i];
+		stack_a[i] = stack_c[stack_a[i]];
 		i++;
 	}
 }

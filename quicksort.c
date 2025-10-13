@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:10:47 by leramos-          #+#    #+#             */
-/*   Updated: 2025/09/30 18:10:47 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/13 12:15:00 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	swap(int *a, int *b)
 {
 	int	tmp;
-	
+
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
@@ -23,8 +23,8 @@ static void	swap(int *a, int *b)
 
 static int	partition(int *array, int low, int high)
 {
-	int pivot;
-	int i;
+	int	pivot;
+	int	i;
 	int	j;
 
 	pivot = array[high];
@@ -43,9 +43,9 @@ static int	partition(int *array, int low, int high)
 	return (i + 1);
 }
 
-void quicksort(int *array, int low, int high)
+void	quicksort(int *array, int low, int high)
 {
-	int pivot_idx;
+	int	pivot_idx;
 
 	if (low < high)
 	{
