@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:40 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 11:51:28 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:54:20 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,11 @@ static void	sort_4_5(t_stack *a, t_stack *b)
 }
 
 /* big_sorting:
-*	Clones Stack A and sorts the clone.
-*	Replaces A values with indexes of the values in the cloned Stack (7 1 5 2 9 --> 3 0 2 1 4).
-*	Splits Stack A into chunks. For each chunk, find the closest element in the top, and move it to B.
-*	In order to save moves, the smallest half of the chunk goes to the bottom of B, while the biggest half goes to the top.
-*	When the numbers are all in B, finds the biggest one and pushes to A.
-*	When finally all numbers are in A, replaces the values in A (which are indexes of C) with the values in C.
+*	Converts stack values to their sorted positions.
+*	Processes chunks: moves numbers to B in chunks, optimizing placement.
+*	Smaller half of the chunk goes to bottom of B, larger to top.
+*	When done, moves all numbers back to A in sorted order.
+*	Restores original values from sorted reference.
 */
 static void	big_sorting(t_stack *a, t_stack *b)
 {
@@ -81,7 +80,7 @@ static void	big_sorting(t_stack *a, t_stack *b)
 	sorted_stack = create_sorted_stack(a->data, a->size);
 	if (!sorted_stack)
 		cleanup_and_exit(ERR_ALLOC, a, b);
-	replace_stack_with_indexes(a->data, a->size, sorted_stack);
+	replace_stack_with_idx(a->data, a->size, sorted_stack);
 	chunk_size = get_chunk_size(a->size);
 	chunk_idx = 0;
 	while (a->size != 0)
@@ -90,7 +89,7 @@ static void	big_sorting(t_stack *a, t_stack *b)
 		chunk_idx++;
 	}
 	place_on_a(a, b);
-	replace_stack_with_elements(a->data, a->size, sorted_stack);
+	replace_stack_with_nbr(a->data, a->size, sorted_stack);
 	free(sorted_stack);
 }
 

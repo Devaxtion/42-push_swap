@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 15:22:31 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:52:53 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ void	print_stacks(t_stack *a, t_stack *b);
 
 // Errors
 
-#define ERR_ALLOC 1
-#define ERR_INVALID_INT 2
-#define ERR_DUPLICATE 3
+# define ERR_ALLOC 1
+# define ERR_INVALID_INT 2
+# define ERR_DUPLICATE 3
+
 void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b);
 
-// Input
+// Initialization
 
 void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b);
 
-// Utils
+// Array Utils
 
 int		array_contains_int(int *array, int size, int n);
 int		is_array_sorted(int *array, int size);
@@ -82,19 +83,19 @@ void	sort(t_stack *a, t_stack *b);
 // Sorting Utils
 
 void	bring_number_to_top(
-	int idx,
-	t_stack *stack,
-	void (*rotate)(t_stack *),
-	void (*reverse_rotate)(t_stack *)
-);
+			int idx,
+			t_stack *stack,
+			void (*rotate)(t_stack *),
+			void (*reverse_rotate)(t_stack *)
+			);
 void	place_on_a(t_stack *a, t_stack *b);
 void	place_on_b(t_stack *a, t_stack *b, int chunk_median);
 
 // Sorted Stack
 
 int		*create_sorted_stack(int *stack, int size);
-void	replace_stack_with_indexes(int *stack_a, int size_a, int *sorted_stack);
-void	replace_stack_with_elements(int *stack_a, int size_a, int *sorted_stack);
+void	replace_stack_with_idx(int *stack_a, int size_a, int *sorted_stack);
+void	replace_stack_with_nbr(int *stack_a, int size_a, int *sorted_stack);
 
 // Chunk Utils
 

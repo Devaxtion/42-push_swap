@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 22:02:52 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 22:02:52 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:04:40 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@ void	print_int_array(int *array, int size)
 	int	i;
 
 	ft_printf("[");
-	for (i = 0; i < size; i++)
+	i = 0;
+	while (i < size)
 	{
 		ft_printf("%d", array[i]);
 		if (i < size - 1)
 			ft_printf(", ");
+		i++;
 	}
 	ft_printf("]\n");
 }

@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 12:29:23 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 13:58:37 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:53:15 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	*create_sorted_stack(int *stack, int size)
 	return (sorted);
 }
 
-void	replace_stack_with_indexes(int *stack_a, int size_a, int *sorted_stack)
+void	replace_stack_with_idx(int *stack_a, int size_a, int *sorted_stack)
 {
 	int	i;
 	int	j;
@@ -40,7 +40,7 @@ void	replace_stack_with_indexes(int *stack_a, int size_a, int *sorted_stack)
 	}
 }
 
-void	replace_stack_with_elements(int *stack_a, int size_a, int *sorted_stack)
+void	replace_stack_with_nbr(int *stack_a, int size_a, int *sorted_stack)
 {
 	int	i;
 
