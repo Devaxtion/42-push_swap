@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
+/*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:09:47 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/13 14:47:43 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:06:27 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,54 +51,40 @@ static int	is_int_valid(char *str)
 	return (1);
 }
 
-static int	array_contains_int(int *array, int size, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (array[i] == n)
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-static int	parse_args_to_stack(char **argv, int *stack, int size)
+static int	parse_args_to_stack(char **argv, t_stack *stack)
 {
 	int	i;
 	int	int_to_add;
 
 	i = 0;
-	while (i < size)
+	while (i < stack->size)
 	{
 		if (!is_int_valid(argv[i + 1]))
 			return (ERR_INVALID_INT);
 		int_to_add = ft_atoi(argv[i + 1]);
-		if (array_contains_int(stack, i, int_to_add))
+		if (array_contains_int(stack->data, i, int_to_add))
 			return (ERR_DUPLICATE);
-		stack[i] = int_to_add;
+		stack->data[i] = int_to_add;
 		i++;
 	}
 	return (0);
 }
 
-void	init_stacks(int argc, char **argv, int **stack_a, int **stack_b, int *size_a, int *size_b)
+void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b)
 {
 	int	status_code;
 
 	if (argc <= 1)
 		cleanup_and_exit(0, NULL, NULL);
-	*size_a = (argc - 1);
-	*stack_a = ft_calloc(*size_a, sizeof(int));
-	if (!*stack_a)
-		cleanup_and_exit(ERR_ALLOC, *stack_a, NULL);
-	status_code = parse_args_to_stack(argv, *stack_a, *size_a);
+	a->size = (argc - 1);
+	a->data = ft_calloc(a->size, sizeof(int));
+	if (!a->data)
+		cleanup_and_exit(ERR_ALLOC, a, NULL);
+	status_code = parse_args_to_stack(argv, a);
 	if (status_code != 0)
-		cleanup_and_exit(status_code, *stack_a, NULL);
-	*size_b = 0;
-	*stack_b = ft_calloc(*size_a, sizeof(int));
-	if (!*stack_b)
-		cleanup_and_exit(ERR_ALLOC, *stack_a, *stack_b);
+		cleanup_and_exit(status_code, a, NULL);
+	b->size = 0;
+	b->data = ft_calloc(a->size, sizeof(int));
+	if (!b->data)
+		cleanup_and_exit(ERR_ALLOC, a, b);
 }

@@ -6,83 +6,62 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:43:58 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/13 13:58:33 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:25:07 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+// If number it's in top half, Rotate till it's in 2nd slot and then use Swap
+// If it's in bottom half, bring it with Reverse ROtate
 void	bring_number_to_top(
-	int		i,
-	int		*stack,
-	int		size,
-	void	(*rotate)(int *, int),
-	void	(*reverse_rotate)(int *, int),
-	void	(*swap)(int *, int)
+	int idx,
+	t_stack *stack,
+	void (*rotate)(t_stack *),
+	void (*reverse_rotate)(t_stack *)
 )
 {
-	int	is_number_in_top_half;
-
-	is_number_in_top_half = (i <= size / 2);
-
-	// if it's in top half, rotate till it's in [1] and then use swap
-	if (is_number_in_top_half)
+	if (idx <= stack->size / 2)
 	{
-		while (i > 0)
+		while (idx > 0)
 		{
-			if (i == 1)
-				swap(stack, size);
-			else
-				rotate(stack, size);
-			i--;
+			rotate(stack);
+			idx--;
 		}
 	}
-
-	// else, we'll bring it with rra
 	else
 	{
-		while (i > 0)
+		while (idx > 0)
 		{
-			reverse_rotate(stack, size);
-			i++;
-			if (i == size)
-				i = 0;
+			reverse_rotate(stack);
+			idx++;
+			if (idx >= stack->size)
+				idx = 0;
 		}
 	}
 }
 
-void	place_on_a(int *stack_a, int *stack_b, int *size_a, int *size_b)
+void	place_on_a(t_stack *a, t_stack *b)
 {
 	int	n_to_push;
 	int	n_to_push_idx;
 
-	while (*size_b != 0)
+	while (b->size != 0)
 	{
-		n_to_push = *size_b - 1;
-		n_to_push_idx = find_n_in_array(stack_b, *size_b, n_to_push);
-
-		// we get n_to_push to the top
-		bring_number_to_top(n_to_push_idx, stack_b, *size_b, do_rb, do_rrb, do_sb);
-
-		// push it to a
-		do_pa(stack_a, stack_b, size_a, size_b);
+		n_to_push = b->size - 1;
+		n_to_push_idx = find_n_in_array(b->data, b->size, n_to_push);
+		bring_number_to_top(n_to_push_idx, b, do_rb, do_rrb);
+		do_pa(a, b);
 	}
 }
 
-void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_median)
+void	place_on_b(t_stack *a, t_stack *b, int chunk_median)
 {
-	// if there is nothing on B, just push B
-	if (*size_b == 0)
-		return (do_pb(stack_a, stack_b, size_a, size_b));
-	
-	// if A[0] > median, push B
-	if (stack_a[0] >= chunk_median)
-		do_pb(stack_a, stack_b, size_a, size_b);
-
-	// else (A[0] < median), push B and rotate B
+	if (b->size == 0 || a->data[0] >= chunk_median)
+		do_pb(a, b);
 	else
 	{
-		do_pb(stack_a, stack_b, size_a, size_b);
-		do_rb(stack_b, *size_b);
+		do_pb(a, b);
+		do_rb(b);
 	}
 }

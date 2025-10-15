@@ -6,21 +6,24 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:33 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/13 12:36:56 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/14 14:06:03 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	cleanup_and_exit(int status_code, int *stack_a, int *stack_b)
+int	array_contains_int(int *array, int size, int n)
 {
-	if (status_code != 0)
-		ft_printf("Error\n");
-	if (stack_a)
-		free(stack_a);
-	if (stack_b)
-		free(stack_b);
-	exit(status_code);
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (array[i] == n)
+			return (1);
+		i++;
+	}
+	return (0);
 }
 
 int	is_array_sorted(int *array, int size)

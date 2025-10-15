@@ -6,42 +6,42 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:40 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/13 14:06:02 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 11:51:28 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_2(int *stack_a, int *size_a)
+static void	sort_2(t_stack *a)
 {
-	do_sa(stack_a, *size_a);
+	do_sa(a);
 }
 
-static void	sort_3(int *stack_a, int *size_a)
+static void	sort_3(t_stack *a)
 {
-	int	a;
-	int	b;
-	int	c;
+	int	x;
+	int	y;
+	int	z;
 
-	a = stack_a[0];
-	b = stack_a[1];
-	c = stack_a[2];
-	if (a > b && b < c && a < c)
-		do_sa(stack_a, *size_a);
-	else if (a > b && b > c)
+	x = a->data[0];
+	y = a->data[1];
+	z = a->data[2];
+	if (x > y && y < z && x < z)
+		do_sa(a);
+	else if (x > y && y > z)
 	{
-		do_sa(stack_a, *size_a);
-		do_rra(stack_a, *size_a);
+		do_sa(a);
+		do_rra(a);
 	}
-	else if (a > b && b < c && a > c)
-		do_ra(stack_a, *size_a);
-	else if (a < b && b > c && a < c)
+	else if (x > y && y < z && x > z)
+		do_ra(a);
+	else if (x < y && y > z && x < z)
 	{
-		do_sa(stack_a, *size_a);
-		do_ra(stack_a, *size_a);
+		do_sa(a);
+		do_ra(a);
 	}
-	else if (a < b && b > c && a > c)
-		do_rra(stack_a, *size_a);
+	else if (x < y && y > z && x > z)
+		do_rra(a);
 }
 
 /* sort_4_5:
@@ -49,19 +49,19 @@ static void	sort_3(int *stack_a, int *size_a)
 *	And then calls sort_3 function for Stack A.
 *	Moves all elements from B to A.
 */
-static void	sort_4_5(int *stack_a, int *stack_b, int *size_a, int *size_b)
+static void	sort_4_5(t_stack *a, t_stack *b)
 {
 	int	smallest_idx;
 
-	while (*size_a > 3)
+	while (a->size > 3)
 	{
-		smallest_idx = get_smallest_idx(stack_a, *size_a);
-		bring_number_to_top(smallest_idx, stack_a, *size_a, do_ra, do_rra, do_sa);
-		do_pb(stack_a, stack_b, size_a, size_b);
+		smallest_idx = get_smallest_idx(a->data, a->size);
+		bring_number_to_top(smallest_idx, a, do_ra, do_rra);
+		do_pb(a, b);
 	}
-	sort_3(stack_a, size_a);
-	while (*size_b > 0)
-		do_pa(stack_a, stack_b, size_a, size_b);
+	sort_3(a);
+	while (b->size > 0)
+		do_pa(a, b);
 }
 
 /* big_sorting:
@@ -72,34 +72,36 @@ static void	sort_4_5(int *stack_a, int *stack_b, int *size_a, int *size_b)
 *	When the numbers are all in B, finds the biggest one and pushes to A.
 *	When finally all numbers are in A, replaces the values in A (which are indexes of C) with the values in C.
 */
-static void	big_sorting(int *stack_a, int *stack_b, int *size_a, int *size_b)
+static void	big_sorting(t_stack *a, t_stack *b)
 {
 	int	chunk_size;
 	int	chunk_idx;
-	int	*stack_c;
+	int	*sorted_stack;
 
-	stack_c = create_sorted_stack(stack_a, *size_a);
-	replace_stack_with_indexes(stack_a, *size_a, stack_c);
-	chunk_size = get_chunk_size(*size_a);
+	sorted_stack = create_sorted_stack(a->data, a->size);
+	if (!sorted_stack)
+		cleanup_and_exit(ERR_ALLOC, a, b);
+	replace_stack_with_indexes(a->data, a->size, sorted_stack);
+	chunk_size = get_chunk_size(a->size);
 	chunk_idx = 0;
-	while (*size_a != 0)
+	while (a->size != 0)
 	{
-		move_chunk_to_b(stack_a, stack_b, size_a, size_b, chunk_size, chunk_idx);
+		move_chunk_to_b(a, b, chunk_size, chunk_idx);
 		chunk_idx++;
 	}
-	place_on_a(stack_a, stack_b, size_a, size_b);
-	replace_stack_with_elements(stack_a, *size_a, stack_c);
-	free(stack_c);
+	place_on_a(a, b);
+	replace_stack_with_elements(a->data, a->size, sorted_stack);
+	free(sorted_stack);
 }
 
-void	sort(int *stack_a, int *stack_b, int *size_a, int *size_b)
+void	sort(t_stack *a, t_stack *b)
 {
-	if (*size_a == 2)
-		sort_2(stack_a, size_a);
-	else if (*size_a == 3)
-		sort_3(stack_a, size_a);
-	else if (*size_a == 4 || *size_a == 5)
-		sort_4_5(stack_a, stack_b, size_a, size_b);
+	if (a->size == 2)
+		sort_2(a);
+	else if (a->size == 3)
+		sort_3(a);
+	else if (a->size <= 5)
+		sort_4_5(a, b);
 	else
-		big_sorting(stack_a, stack_b, size_a, size_b);
+		big_sorting(a, b);
 }

@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_push.c                                          :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 18:13:46 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 14:28:38 by leramos-         ###   ########.fr       */
+/*   Created: 2025/10/14 22:02:52 by leramos-          #+#    #+#             */
+/*   Updated: 2025/10/14 22:02:52 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Take the first element at the top of src and put it at the top of dest.
-// Do nothing if src is empty.
-static void	push(t_stack *dest, t_stack *src)
+void	print_int_array(int *array, int size)
 {
-	if (src->size == 0)
-		return ;
-	dest->size++;
-	push_elements_down(dest);
-	dest->data[0] = src->data[0];
-	push_elements_up(src);
-	src->size--;
+	int	i;
+
+	ft_printf("[");
+	for (i = 0; i < size; i++)
+	{
+		ft_printf("%d", array[i]);
+		if (i < size - 1)
+			ft_printf(", ");
+	}
+	ft_printf("]\n");
 }
 
-void	do_pa(t_stack *a, t_stack *b)
+void	print_stack(t_stack *stack, char l)
 {
-	push(a, b);
-	ft_printf("pa\n");
+	ft_printf("Stack %c (%i): ", l, stack->size);
+	print_int_array(stack->data, stack->size);
 }
 
-void	do_pb(t_stack *a, t_stack *b)
+void	print_stacks(t_stack *a, t_stack *b)
 {
-	push(b, a);
-	ft_printf("pb\n");
+	print_stack(a, 'A');
+	print_stack(b, 'B');
+	ft_printf("\n");
 }

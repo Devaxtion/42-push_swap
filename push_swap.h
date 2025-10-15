@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/13 14:07:02 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/14 15:22:31 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,35 @@
 # include "./libft/libft.h"
 # include "./libft/ft_printf.h"
 
+// Stack Structure
+
+typedef struct s_stack
+{
+	int	*data;
+	int	size;
+	int	capacity;
+}	t_stack;
+
+// Print
+
+void	print_int_array(int *array, int size);
+void	print_stack(t_stack *stack, char l);
+void	print_stacks(t_stack *a, t_stack *b);
+
 // Errors
 
 #define ERR_ALLOC 1
 #define ERR_INVALID_INT 2
 #define ERR_DUPLICATE 3
+void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b);
 
 // Input
 
-void	init_stacks(int argc, char **argv, int **stack_a, int **stack_b, int *size_a, int *size_b);
+void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b);
 
 // Utils
 
-void	cleanup_and_exit(int status_code, int *stack_a, int *stack_b);
+int		array_contains_int(int *array, int size, int n);
 int		is_array_sorted(int *array, int size);
 int		get_smallest_idx(int *array, int size);
 void	copy_int_array(int *dest, int *src, int src_size);
@@ -39,48 +55,51 @@ int		find_n_in_array(int *array, int size, int n);
 
 // Operations
 
-void	do_sa(int *stack_a, int size_a);
-void	do_sb(int *stack_b, int size_b);
-void	do_ss(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_sa(t_stack *a);
+void	do_sb(t_stack *b);
+void	do_ss(t_stack *a, t_stack *b);
 
-void	do_pa(int *stack_a, int *stack_b, int *size_a, int *size_b);
-void	do_pb(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	do_pa(t_stack *a, t_stack *b);
+void	do_pb(t_stack *a, t_stack *b);
 
-void	do_ra(int *stack_a, int size_a);
-void	do_rb(int *stack_b, int size_b);
-void	do_rr(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_ra(t_stack *a);
+void	do_rb(t_stack *b);
+void	do_rr(t_stack *a, t_stack *b);
 
-void	do_rra(int *stack_a, int size_a);
-void	do_rrb(int *stack_b, int size_b);
-void	do_rrr(int *stack_a, int *stack_b, int size_a, int size_b);
+void	do_rra(t_stack *a);
+void	do_rrb(t_stack *b);
+void	do_rrr(t_stack *a, t_stack *b);
+
+// Operation Utils
+
+void	push_elements_down(t_stack *stack);
+void	push_elements_up(t_stack *stack);
 
 // Sorting
 
-void	sort(int *stack_a, int *stack_b, int *size_a, int *size_b);
+void	sort(t_stack *a, t_stack *b);
 
 // Sorting Utils
 
 void	bring_number_to_top(
-	int		i,
-	int		*stack,
-	int		size,
-	void	(*rotate)(int *, int),
-	void	(*reverse_rotate)(int *, int),
-	void	(*swap)(int *, int)
+	int idx,
+	t_stack *stack,
+	void (*rotate)(t_stack *),
+	void (*reverse_rotate)(t_stack *)
 );
-void	place_on_a(int *stack_a, int *stack_b, int *size_a, int *size_b);
-void	place_on_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_median);
+void	place_on_a(t_stack *a, t_stack *b);
+void	place_on_b(t_stack *a, t_stack *b, int chunk_median);
 
 // Sorted Stack
 
 int		*create_sorted_stack(int *stack, int size);
-void	replace_stack_with_indexes(int *stack_a, int size_a, int *stack_c);
-void	replace_stack_with_elements(int *stack_a, int size_a, int *stack_c);
+void	replace_stack_with_indexes(int *stack_a, int size_a, int *sorted_stack);
+void	replace_stack_with_elements(int *stack_a, int size_a, int *sorted_stack);
 
 // Chunk Utils
 
 int		get_chunk_size(int size_a);
-void	move_chunk_to_b(int *stack_a, int *stack_b, int *size_a, int *size_b, int chunk_size, int chunk_idx);
+void	move_chunk_to_b(t_stack *a, t_stack *b, int chunk_size, int chunk_idx);
 
 // Quick Sort
 

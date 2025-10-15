@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_push.c                                          :+:      :+:    :+:   */
+/*   op_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/30 18:13:46 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 14:28:38 by leramos-         ###   ########.fr       */
+/*   Created: 2025/10/14 14:14:57 by leramos-          #+#    #+#             */
+/*   Updated: 2025/10/14 15:29:22 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// Take the first element at the top of src and put it at the top of dest.
-// Do nothing if src is empty.
-static void	push(t_stack *dest, t_stack *src)
+// Shiftes down all elements by 1, essentially leaving the first one repeated
+void	push_elements_down(t_stack *stack)
 {
-	if (src->size == 0)
-		return ;
-	dest->size++;
-	push_elements_down(dest);
-	dest->data[0] = src->data[0];
-	push_elements_up(src);
-	src->size--;
+	int	i;
+
+	i = stack->size - 1;
+	while (i > 0)
+	{
+		stack->data[i] = stack->data[i - 1];
+		i--;
+	}
 }
 
-void	do_pa(t_stack *a, t_stack *b)
+// Shiftes up all elements by 1, essentially losing the first one
+void	push_elements_up(t_stack *stack)
 {
-	push(a, b);
-	ft_printf("pa\n");
-}
+	int	i;
 
-void	do_pb(t_stack *a, t_stack *b)
-{
-	push(b, a);
-	ft_printf("pb\n");
+	i = 1;
+	while (i < stack->size)
+	{
+		stack->data[i - 1] = stack->data[i];
+		i++;
+	}
 }
