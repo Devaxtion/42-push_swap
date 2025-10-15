@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 12:52:53 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:08:37 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "./libft/libft.h"
-# include "./libft/ft_printf.h"
+# include "libft.h"
+# include "ft_printf.h"
 
 // Stack Structure
 
