@@ -6,7 +6,7 @@
 #    By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 11:54:19 by leramos-          #+#    #+#              #
-#    Updated: 2025/11/25 12:08:20 by leramos-         ###   ########.fr        #
+#    Updated: 2025/11/25 15:21:46 by leramos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ AR = ar rcs
 RM = rm -f
 
 # Files
-FILES = main exit initialization array_utils op_utils op_swap op_push op_rotate op_reverse_rotate sorting sorting_utils chunk_utils sorted_stack quicksort
+FILES = main exit initialization array_utils op_utils op_swap op_push op_rotate op_reverse_rotate sorting stack_utils chunk_utils quicksort
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(FILES)))

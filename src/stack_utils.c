@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_utils.c                                    :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 12:43:58 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 12:17:24 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:21:03 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	rank_encode(int *stack_to_encode, int size, int *sorted_stack)
+{
+	int	i;
+	int	idx;
+
+	i = 0;
+	while (i < size)
+	{
+		idx = find_n_in_array(sorted_stack, size, stack_to_encode[i]);
+		stack_to_encode[i] = idx;
+		i++;
+	}
+}
+
+void	rank_decode(int *stack_to_decode, int size, int *sorted_stack)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		stack_to_decode[i] = sorted_stack[stack_to_decode[i]];
+		i++;
+	}
+}
 
 // If number it's in top half, Rotate till it's in 2nd slot and then use Swap
 // If it's in bottom half, bring it with Reverse Rotate

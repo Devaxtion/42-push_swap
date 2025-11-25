@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:09:47 by leramos-          #+#    #+#             */
-/*   Updated: 2025/11/25 14:25:02 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:28:22 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 {
 	int	i;
 	int	int_to_add;
-	int	stack_contains_int;
 
 	i = 0;
 	while (i < stack->size)
@@ -63,8 +62,7 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 		if (!is_int_valid(argv[i + 1]))
 			return (ERR_INVALID_INT);
 		int_to_add = ft_atoi(argv[i + 1]);
-		stack_contains_int = (find_n_in_array(stack->data, i, int_to_add) != -1);
-		if (stack_contains_int)
+		if (find_n_in_array(stack->data, i, int_to_add) != -1)
 			return (ERR_DUPLICATE);
 		stack->data[i] = int_to_add;
 		i++;

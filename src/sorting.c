@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:40 by leramos-          #+#    #+#             */
-/*   Updated: 2025/11/25 14:31:33 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:20:12 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	big_sorting(t_stack *a, t_stack *b)
 	int	chunk_idx;
 	int	*stack_tmp;
 
-	stack_tmp = ft_stackdup(a->data, a->size);
+	stack_tmp = ft_arraydup(a->data, a->size);
 	if (!stack_tmp)
 		cleanup_and_exit(ERR_ALLOC, a, b);
 	quicksort(stack_tmp, 0, a->size - 1);

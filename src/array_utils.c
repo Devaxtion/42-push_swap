@@ -6,11 +6,30 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 12:36:48 by leramos-          #+#    #+#             */
-/*   Updated: 2025/11/25 14:23:49 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:23:04 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	*ft_arraydup(int *src, int size)
+{
+	int	*dst;
+	int	i;
+
+	if (!src || size <= 0)
+		return (NULL);
+	dst = malloc(size * sizeof(int));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
+}
 
 int	is_array_sorted(int *array, int size)
 {
