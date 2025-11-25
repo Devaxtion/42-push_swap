@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 14:08:37 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:25:11 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b);
 
 // Array Utils
 
-int		array_contains_int(int *array, int size, int n);
 int		is_array_sorted(int *array, int size);
 int		get_smallest_idx(int *array, int size);
-void	copy_int_array(int *dest, int *src, int src_size);
 int		find_n_in_array(int *array, int size, int n);
 
 // Operations
@@ -93,9 +91,10 @@ void	place_on_b(t_stack *a, t_stack *b, int chunk_median);
 
 // Sorted Stack
 
-int		*create_sorted_stack(int *stack, int size);
-void	replace_stack_with_idx(int *stack_a, int size_a, int *sorted_stack);
-void	replace_stack_with_nbr(int *stack_a, int size_a, int *sorted_stack);
+int		*ft_stackdup(int *src, int size);
+// int		*create_sorted_stack(int *stack, int size);
+void	rank_encode(int *stack_a, int size_a, int *sorted_stack);
+void	rank_decode(int *stack_a, int size_a, int *sorted_stack);
 
 // Chunk Utils
 

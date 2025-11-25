@@ -6,48 +6,51 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 12:29:23 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 12:53:15 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:30:51 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	*create_sorted_stack(int *stack, int size)
+int	*ft_stackdup(int *src, int size)
 {
-	int	*sorted;
+	int	*dst;
+	int	i;
 
-	sorted = ft_calloc(size, sizeof(int));
-	if (!sorted)
+	dst = ft_calloc(size, sizeof(int));
+	if (!dst)
 		return (NULL);
-	copy_int_array(sorted, stack, size);
-	quicksort(sorted, 0, size - 1);
-	return (sorted);
+	i = 0;
+	while (i < size)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
 }
 
-void	replace_stack_with_idx(int *stack_a, int size_a, int *sorted_stack)
+void	rank_encode(int *stack_to_encode, int size, int *sorted_stack)
 {
 	int	i;
-	int	j;
+	int	idx;
 
 	i = 0;
-	while (i < size_a)
+	while (i < size)
 	{
-		j = 0;
-		while (sorted_stack[j] != stack_a[i])
-			j++;
-		stack_a[i] = j;
+		idx = find_n_in_array(sorted_stack, size, stack_to_encode[i]);
+		stack_to_encode[i] = idx;
 		i++;
 	}
 }
 
-void	replace_stack_with_nbr(int *stack_a, int size_a, int *sorted_stack)
+void	rank_decode(int *stack_to_decode, int size, int *sorted_stack)
 {
 	int	i;
 
 	i = 0;
-	while (i < size_a)
+	while (i < size)
 	{
-		stack_a[i] = sorted_stack[stack_a[i]];
+		stack_to_decode[i] = sorted_stack[stack_to_decode[i]];
 		i++;
 	}
 }

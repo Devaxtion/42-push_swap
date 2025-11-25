@@ -6,7 +6,7 @@
 #    By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 11:54:19 by leramos-          #+#    #+#              #
-#    Updated: 2025/10/15 14:49:18 by leramos-         ###   ########.fr        #
+#    Updated: 2025/11/25 12:08:20 by leramos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ RM = rm -f
 # Files
 FILES = main exit initialization array_utils op_utils op_swap op_push op_rotate op_reverse_rotate sorting sorting_utils chunk_utils sorted_stack quicksort
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
-OUT_FILE = $(NAME)
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(FILES)))
 OBJS = $(SRCS:.c=.o)
@@ -41,7 +40,7 @@ $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
 
 ${NAME}: ${OBJS} $(LIBFT_LIB)
-	$(CC) $(CFLAGS) $^ -o $(OUT_FILE)
+	$(CC) $(CFLAGS) $^ -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -49,7 +48,7 @@ ${NAME}: ${OBJS} $(LIBFT_LIB)
 clean:
 	@make -C $(LIBFT_DIR) clean
 	$(RM) $(OBJS)
-	$(RM) $(OUT_FILE)
+	$(RM) $(NAME)
 
 fclean: clean
 	@make -C $(LIBFT_DIR) fclean

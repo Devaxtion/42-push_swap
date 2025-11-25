@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 18:32:40 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/15 12:54:20 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:31:33 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	sort_3(t_stack *a)
 }
 
 /* sort_4_5:
-*	Moves the smallest elements till Stack A only has 3 elements.
+*	Moves the smallest elements to B till Stack A only has 3 elements.
 *	And then calls sort_3 function for Stack A.
 *	Moves all elements from B to A.
 */
@@ -71,16 +71,18 @@ static void	sort_4_5(t_stack *a, t_stack *b)
 *	When done, moves all numbers back to A in sorted order.
 *	Restores original values from sorted reference.
 */
+
 static void	big_sorting(t_stack *a, t_stack *b)
 {
 	int	chunk_size;
 	int	chunk_idx;
-	int	*sorted_stack;
+	int	*stack_tmp;
 
-	sorted_stack = create_sorted_stack(a->data, a->size);
-	if (!sorted_stack)
+	stack_tmp = ft_stackdup(a->data, a->size);
+	if (!stack_tmp)
 		cleanup_and_exit(ERR_ALLOC, a, b);
-	replace_stack_with_idx(a->data, a->size, sorted_stack);
+	quicksort(stack_tmp, 0, a->size - 1);
+	rank_encode(a->data, a->size, stack_tmp);
 	chunk_size = get_chunk_size(a->size);
 	chunk_idx = 0;
 	while (a->size != 0)
@@ -89,8 +91,8 @@ static void	big_sorting(t_stack *a, t_stack *b)
 		chunk_idx++;
 	}
 	place_on_a(a, b);
-	replace_stack_with_nbr(a->data, a->size, sorted_stack);
-	free(sorted_stack);
+	rank_decode(a->data, a->size, stack_tmp);
+	free(stack_tmp);
 }
 
 void	sort(t_stack *a, t_stack *b)

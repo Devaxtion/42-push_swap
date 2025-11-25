@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:09:47 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 14:06:27 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:25:02 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 {
 	int	i;
 	int	int_to_add;
+	int	stack_contains_int;
 
 	i = 0;
 	while (i < stack->size)
@@ -62,7 +63,8 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 		if (!is_int_valid(argv[i + 1]))
 			return (ERR_INVALID_INT);
 		int_to_add = ft_atoi(argv[i + 1]);
-		if (array_contains_int(stack->data, i, int_to_add))
+		stack_contains_int = (find_n_in_array(stack->data, i, int_to_add) != -1);
+		if (stack_contains_int)
 			return (ERR_DUPLICATE);
 		stack->data[i] = int_to_add;
 		i++;
@@ -70,21 +72,26 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 	return (0);
 }
 
-void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b)
+static void	allocate_stacks(int argc, t_stack *a, t_stack *b)
 {
-	int	status_code;
-
-	if (argc <= 1)
-		cleanup_and_exit(0, NULL, NULL);
-	a->size = (argc - 1);
+	a->size = argc - 1;
 	a->data = ft_calloc(a->size, sizeof(int));
 	if (!a->data)
 		cleanup_and_exit(ERR_ALLOC, a, NULL);
-	status_code = parse_args_to_stack(argv, a);
-	if (status_code != 0)
-		cleanup_and_exit(status_code, a, NULL);
 	b->size = 0;
 	b->data = ft_calloc(a->size, sizeof(int));
 	if (!b->data)
 		cleanup_and_exit(ERR_ALLOC, a, b);
+}
+
+void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b)
+{
+	int	status_code;
+
+	if (argc < 2)
+		cleanup_and_exit(0, NULL, NULL);
+	allocate_stacks(argc, a, b);
+	status_code = parse_args_to_stack(argv, a);
+	if (status_code != 0)
+		cleanup_and_exit(status_code, a, NULL);
 }
