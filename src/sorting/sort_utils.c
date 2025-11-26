@@ -47,26 +47,21 @@ void	bring_number_to_top(
 	void (*reverse_rotate)(t_stack *)
 )
 {
-	int	moves_needed;
+	int		moves_needed;
+	void	(*operation)(t_stack *);
 
 	if (idx <= stack->size / 2)
 	{
+		operation = rotate;
 		moves_needed = idx;
-		while (moves_needed > 0)
-		{
-			rotate(stack);
-			moves_needed--;
-		}
 	}
 	else
 	{
+		operation = reverse_rotate;
 		moves_needed = stack->size - idx;
-		while (moves_needed > 0)
-		{
-			reverse_rotate(stack);
-			moves_needed--;
-		}
 	}
+	while (moves_needed-- > 0)
+		operation(stack);
 }
 
 void	place_on_a(t_stack *a, t_stack *b)

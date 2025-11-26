@@ -31,7 +31,7 @@ static int	get_chunk_size(int size_a)
 	if (size_a <= 100)
 		return (size_a / 5 + (size_a % 5 != 0));
 	else
-		return (size_a / 11 + (size_a % 5 != 0));
+		return (size_a / 11 + (size_a % 11 != 0));
 }
 
 static int	get_num_chunks(int stack_size, int chunk_size)
