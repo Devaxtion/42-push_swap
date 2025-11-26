@@ -27,7 +27,10 @@ AR = ar rcs
 RM = rm -f
 
 # Files
-FILES = main exit initialization array_utils quicksort op_utils swap push rotate reverse_rotate sorting sort_utils chunk_utils chunk_management
+FILES = main exit initialization array_utils quicksort \
+		operations/op_utils operations/swap operations/push \
+		operations/rotate operations/reverse_rotate \
+		sorting/sorting sorting/sort_utils sorting/chunk_utils sorting/chunk_management
 LIBFT_LIB = $(LIBFT_DIR)/libft.a
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(addsuffix .c, $(FILES)))

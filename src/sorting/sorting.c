@@ -76,18 +76,20 @@ static void	big_sorting(t_stack *a, t_stack *b)
 {
 	t_chunk	**chunks;
 	int		*stack_tmp;
+	int		i;
 
 	stack_tmp = ft_arraydup(a->data, a->size);
 	if (!stack_tmp)
 		cleanup_and_exit(ERR_ALLOC, a, b);
 	quicksort(stack_tmp, 0, a->size - 1);
 	rank_encode(a->data, a->size, stack_tmp);
-	chunks = init_chunks();
-	if (!chunk)
+	chunks = init_chunks(a);
+	if (!chunks)
 		cleanup_and_exit(ERR_ALLOC, a, b);
+	i = 0;
 	while (chunks[i])
 	{
-		move_chunk_to_b(a, b, chunks[i])
+		move_chunk_to_b(a, b, chunks[i]);
 		i++;
 	}
 	place_on_a(a, b);

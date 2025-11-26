@@ -39,21 +39,22 @@ static int	get_num_chunks(int stack_size, int chunk_size)
 	return ((stack_size / chunk_size) + (stack_size % chunk_size != 0));
 }
 
-t_chunk	**init_chunks(t_stack a)
+t_chunk	**init_chunks(t_stack *a)
 {
 	t_chunk	**chunks;
 	int		chunk_size;
 	int		num_chunks;
+	int		i;
 
 	chunk_size = get_chunk_size(a->size);
 	num_chunks = get_num_chunks(a->size, chunk_size);
 	chunks = malloc(sizeof(t_chunk *) * (num_chunks + 1));
-	if (!chunk)
+	if (!chunks)
 		return (NULL);
 	i = 0;
 	while (i < num_chunks)
 	{
-		chunks[i] = create_chunk(chunk_size);
+		chunks[i] = create_chunk(chunk_size, i);
 		if (!chunks[i])
 		{
 			while (--i >= 0)
@@ -66,7 +67,7 @@ t_chunk	**init_chunks(t_stack a)
 	return (chunks);
 }
 
-void	free_chunks(t_chunk **chunks, int num_chunks)
+void	free_chunks(t_chunk **chunks)
 {
 	int	i;
 

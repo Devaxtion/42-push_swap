@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 
 	a = malloc(sizeof(t_stack));
 	b = malloc(sizeof(t_stack));
+	if (!a || !b)
+		cleanup_and_exit(1, NULL, NULL);
 	init_stacks(argc, argv, a, b);
 	if (!is_array_sorted(a->data, a->size))
 		sort(a, b);
