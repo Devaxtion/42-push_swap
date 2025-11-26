@@ -99,7 +99,6 @@ void	bring_number_to_top(
 			void (*rotate)(t_stack *),
 			void (*reverse_rotate)(t_stack *)
 			);
-void	place_on_b(t_stack *a, t_stack *b, int chunk_median);
 void	place_on_a(t_stack *a, t_stack *b);
 
 // Chunk Utils

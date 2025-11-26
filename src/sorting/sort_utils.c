@@ -38,8 +38,8 @@ void	rank_decode(int *stack_to_decode, int size, int *sorted_stack)
 	}
 }
 
-// If number it's in top half, Rotate till it's in 2nd slot and then use Swap
-// If it's in bottom half, bring it with Reverse Rotate
+// If number it's in top half, Rotate till it's on top
+// If it's in bottom half, bring it with Reverse Rotate till it's on top
 void	bring_number_to_top(
 	int idx,
 	t_stack *stack,
@@ -69,27 +69,16 @@ void	bring_number_to_top(
 	}
 }
 
-void	place_on_b(t_stack *a, t_stack *b, int chunk_median)
-{
-	if (b->size == 0 || a->data[0] >= chunk_median)
-		do_pb(a, b);
-	else
-	{
-		do_pb(a, b);
-		do_rb(b);
-	}
-}
-
 void	place_on_a(t_stack *a, t_stack *b)
 {
-	int	n_to_push;
-	int	n_to_push_idx;
+	int	highest_nbr;
+	int	highest_nbr_idx;
 
 	while (b->size != 0)
 	{
-		n_to_push = b->size - 1;
-		n_to_push_idx = find_n_in_array(b->data, b->size, n_to_push);
-		bring_number_to_top(n_to_push_idx, b, do_rb, do_rrb);
+		highest_nbr = b->size - 1;
+		highest_nbr_idx = find_n_in_array(b->data, b->size, highest_nbr);
+		bring_number_to_top(highest_nbr_idx, b, do_rb, do_rrb);
 		do_pa(a, b);
 	}
 }

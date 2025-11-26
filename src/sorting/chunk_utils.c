@@ -12,24 +12,23 @@
 
 #include "push_swap.h"
 
-static int	get_closest_in_chunk(
-	int *stack,
-	int size,
-	int chunk_end
-)
+static int	is_number_in_chunk(int number, t_chunk chunk)
+{
+	return (number >= chunk.start && number <= chunk.end);
+}
+
+static int	get_closest_in_chunk(t_stack stack, t_chunk chunk)
 {
 	int	i;
 	int	j;
 
-	if (size <= 0)
-		return (-1);
 	i = 0;
-	while (i < size)
+	while (i < stack.size)
 	{
-		j = size - 1 - i;
-		if (stack[i] <= chunk_end)
+		j = (stack.size - 1) - i;
+		if (is_number_in_chunk(stack.data[i], chunk))
 			return (i);
-		if (stack[j] <= chunk_end)
+		if (is_number_in_chunk(stack.data[j], chunk))
 			return (j);
 		i++;
 	}
@@ -42,16 +41,12 @@ void	move_chunk_to_b(t_stack *a, t_stack *b, t_chunk *chunk)
 
 	while (1)
 	{
-		closest_number_idx = get_closest_in_chunk(a->data, a->size, chunk->end);
+		closest_number_idx = get_closest_in_chunk(*a, *chunk);
 		if (closest_number_idx == -1)
 			break ;
 		bring_number_to_top(closest_number_idx, a, do_ra, do_rra);
-		if (b->size == 0 || a->data[0] >= chunk->median)
-			do_pb(a, b);
-		else
-		{
-			do_pb(a, b);
+		do_pb(a, b);
+		if (b->size > 0 && a->data[0] < chunk->median)
 			do_rb(b);
-		}
 	}
 }
