@@ -54,7 +54,7 @@ void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b);
 
 // Initialization
 
-void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b);
+void	init_stacks(int argc, char **argv, t_stack **a, t_stack **b);
 
 // Array Utils
 

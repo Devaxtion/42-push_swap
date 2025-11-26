@@ -25,7 +25,8 @@ static void	free_stack(t_stack *stack)
 void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b)
 {
 	if (status_code != 0)
-		ft_printf("Error\n");
+	//	ft_printf("Error\n");
+		write(2, "Error\n", 6);
 	free_stack(a);
 	free_stack(b);
 	exit(status_code);

@@ -70,26 +70,32 @@ static int	parse_args_to_stack(char **argv, t_stack *stack)
 	return (0);
 }
 
-static void	allocate_stacks(int argc, t_stack *a, t_stack *b)
+static void	allocate_stacks(int argc, t_stack **a, t_stack **b)
 {
-	a->size = argc - 1;
-	a->data = ft_calloc(a->size, sizeof(int));
-	if (!a->data)
-		cleanup_and_exit(ERR_ALLOC, a, NULL);
-	b->size = 0;
-	b->data = ft_calloc(a->size, sizeof(int));
-	if (!b->data)
-		cleanup_and_exit(ERR_ALLOC, a, b);
+	*a = malloc(sizeof(t_stack));
+	if (!*a)
+		cleanup_and_exit(ERR_ALLOC, NULL, NULL);
+	*b = malloc(sizeof(t_stack));
+	if (!*b)
+		cleanup_and_exit(ERR_ALLOC, *a, NULL);
+	(*a)->size = argc - 1;
+	(*a)->data = ft_calloc((*a)->size, sizeof(int));
+	if (!(*a)->data)
+		cleanup_and_exit(ERR_ALLOC, *a, NULL);
+	(*b)->size = 0;
+	(*b)->data = ft_calloc((*a)->size, sizeof(int));
+	if (!(*b)->data)
+		cleanup_and_exit(ERR_ALLOC, *a, *b);
 }
 
-void	init_stacks(int argc, char **argv, t_stack *a, t_stack *b)
+void	init_stacks(int argc, char **argv, t_stack **a, t_stack **b)
 {
 	int	status_code;
 
 	if (argc < 2)
 		cleanup_and_exit(0, NULL, NULL);
 	allocate_stacks(argc, a, b);
-	status_code = parse_args_to_stack(argv, a);
+	status_code = parse_args_to_stack(argv, *a);
 	if (status_code != 0)
-		cleanup_and_exit(status_code, a, NULL);
+		cleanup_and_exit(status_code, *a, NULL);
 }
