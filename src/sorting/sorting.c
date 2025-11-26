@@ -74,25 +74,26 @@ static void	sort_4_5(t_stack *a, t_stack *b)
 
 static void	big_sorting(t_stack *a, t_stack *b)
 {
-	int	chunk_size;
-	int	chunk_idx;
-	int	*stack_tmp;
+	t_chunk	**chunks;
+	int		*stack_tmp;
 
 	stack_tmp = ft_arraydup(a->data, a->size);
 	if (!stack_tmp)
 		cleanup_and_exit(ERR_ALLOC, a, b);
 	quicksort(stack_tmp, 0, a->size - 1);
 	rank_encode(a->data, a->size, stack_tmp);
-	chunk_size = get_chunk_size(a->size);
-	chunk_idx = 0;
-	while (a->size != 0)
+	chunks = init_chunks();
+	if (!chunk)
+		cleanup_and_exit(ERR_ALLOC, a, b);
+	while (chunks[i])
 	{
-		move_chunk_to_b(a, b, chunk_size, chunk_idx);
-		chunk_idx++;
+		move_chunk_to_b(a, b, chunks[i])
+		i++;
 	}
 	place_on_a(a, b);
 	rank_decode(a->data, a->size, stack_tmp);
 	free(stack_tmp);
+	free_chunks(chunks);
 }
 
 void	sort(t_stack *a, t_stack *b)

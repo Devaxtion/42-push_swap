@@ -19,14 +19,28 @@
 # include "libft.h"
 # include "ft_printf.h"
 
-// Stack Structure
+// Errors
+
+# define ERR_ALLOC 1
+# define ERR_INVALID_INT 2
+# define ERR_DUPLICATE 3
+
+// Structures
+
+typedef struct s_chunk
+{
+	int		start;
+	int		end;
+	int		median;
+	int		size;
+}		t_chunk;
 
 typedef struct s_stack
 {
 	int	*data;
 	int	size;
 	int	capacity;
-}	t_stack;
+}		t_stack;
 
 // Print
 
@@ -34,11 +48,7 @@ void	print_int_array(int *array, int size);
 void	print_stack(t_stack *stack, char l);
 void	print_stacks(t_stack *a, t_stack *b);
 
-// Errors
-
-# define ERR_ALLOC 1
-# define ERR_INVALID_INT 2
-# define ERR_DUPLICATE 3
+// Exit
 
 void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b);
 
@@ -79,23 +89,32 @@ void	push_elements_up(t_stack *stack);
 
 void	sort(t_stack *a, t_stack *b);
 
-// Stack Utils
+// Sorting Utils
 
-void	rank_encode(int *stack_a, int size_a, int *sorted_stack);
-void	rank_decode(int *stack_a, int size_a, int *sorted_stack);
+void	rank_encode(int *stack_to_encode, int size, int *sorted_stack);
+void	rank_decode(int *stack_to_decode, int size, int *sorted_stack);
 void	bring_number_to_top(
-			int idx,
-			t_stack *stack,
-			void (*rotate)(t_stack *),
-			void (*reverse_rotate)(t_stack *)
-			);
-void	place_on_a(t_stack *a, t_stack *b);
+	int idx,
+	t_stack *stack,
+	void (*rotate)(t_stack *),
+	void (*reverse_rotate)(t_stack *)
+);
 void	place_on_b(t_stack *a, t_stack *b, int chunk_median);
+void	place_on_a(t_stack *a, t_stack *b);
 
 // Chunk Utils
 
-int		get_chunk_size(int size_a);
-void	move_chunk_to_b(t_stack *a, t_stack *b, int chunk_size, int chunk_idx);
+static int	get_closest_in_chunk(
+	int *stack,
+	int size,
+	int chunk_end
+);
+void	move_chunk_to_b(t_stack *a, t_stack *b, t_chunk chunk);
+
+// Chunk Management
+
+t_chunk	**init_chunks(t_stack a);
+void	free_chunks(t_chunk **chunks, int num_chunks);
 
 // Quick Sort
 
