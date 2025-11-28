@@ -39,7 +39,6 @@ typedef struct s_stack
 {
 	int	*data;
 	int	size;
-	int	capacity;
 }		t_stack;
 
 // Print

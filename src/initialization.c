@@ -97,5 +97,5 @@ void	init_stacks(int argc, char **argv, t_stack **a, t_stack **b)
 	allocate_stacks(argc, a, b);
 	status_code = parse_args_to_stack(argv, *a);
 	if (status_code != 0)
-		cleanup_and_exit(status_code, *a, NULL);
+		cleanup_and_exit(status_code, *a, *b);
 }
