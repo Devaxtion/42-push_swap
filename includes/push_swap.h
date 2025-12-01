@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/11/25 15:23:19 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/12/01 13:21:04 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ typedef struct s_stack
 	int	*data;
 	int	size;
 }		t_stack;
-
-// Print
-
-void	print_int_array(int *array, int size);
-void	print_stack(t_stack *stack, char l);
-void	print_stacks(t_stack *a, t_stack *b);
 
 // Exit
 
