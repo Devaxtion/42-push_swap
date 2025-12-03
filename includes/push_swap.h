@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/16 17:05:42 by leramos-          #+#    #+#             */
-/*   Updated: 2025/12/01 13:21:04 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:35:33 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@ typedef struct s_stack
 
 // Exit
 
+void	free_str_array(char **array);
 void	cleanup_and_exit(int status_code, t_stack *a, t_stack *b);
+
+// Validation
+
+int		is_int_valid(char *str);
 
 // Initialization
 
-void	init_stacks(int argc, char **argv, t_stack **a, t_stack **b);
+void	init_stacks(int ac, char **av, t_stack **a, t_stack **b);
 
 // Array Utils
 
@@ -55,6 +60,7 @@ int		*ft_arraydup(int *src, int size);
 int		is_array_sorted(int *array, int size);
 int		get_smallest_idx(int *array, int size);
 int		find_n_in_array(int *array, int size, int n);
+int		ft_strarraylen(char **array);
 
 // Operations
 

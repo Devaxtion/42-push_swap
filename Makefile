@@ -6,7 +6,7 @@
 #    By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/10 11:54:19 by leramos-          #+#    #+#              #
-#    Updated: 2025/11/25 15:21:46 by leramos-         ###   ########.fr        #
+#    Updated: 2025/12/03 15:35:40 by leramos-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ AR = ar rcs
 RM = rm -f
 
 # Files
-FILES = main exit initialization array_utils quicksort \
+FILES = main exit initialization validation array_utils quicksort \
 		operations/op_utils operations/swap operations/push \
 		operations/rotate operations/reverse_rotate \
 		sorting/sorting sorting/sort_utils sorting/chunk_utils sorting/chunk_management

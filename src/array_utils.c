@@ -6,7 +6,7 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 12:36:48 by leramos-          #+#    #+#             */
-/*   Updated: 2025/11/25 15:23:04 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:22:38 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ int	find_n_in_array(int *array, int size, int n)
 		i++;
 	}
 	return (-1);
+}
+
+int	ft_strarraylen(char **array)
+{
+	int	len;
+
+	len = 0;
+	while (array[len])
+		len++;
+	return (len);
 }

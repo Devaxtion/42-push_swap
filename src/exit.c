@@ -6,11 +6,23 @@
 /*   By: leramos- <leramos-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 14:03:44 by leramos-          #+#    #+#             */
-/*   Updated: 2025/10/14 14:05:30 by leramos-         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:20:35 by leramos-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_str_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+		free(array[i++]);
+	free(array);
+}
 
 static void	free_stack(t_stack *stack)
 {
